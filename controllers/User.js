@@ -2,25 +2,20 @@ import jwt from 'jsonwebtoken'
 import bCrypt from 'bcryptjs'
 import User from '../models/User.js'
 export default {
-    validateToken:req=>{
-        return new Promise((resolve,reject)=>{
-            if(req.headers&&req.headers.authorization){
-                let authorization = req.headers.authorization
-                let decoded
-                try{
-                    decoded = jwt.verify(authorization,process.env.JWT_SECRET) 
-                }
-                catch(err){
-                    reject('Token not valid')
-                }
-                let userId = decoded.id 
-                User
-                    .findById(userId)
-                    .then(user=>{resolve({_id:user._id,username:user.username})})
-                    .catch(e=>reject('Token Error: '+e))
-            }
-            else reject('No token found')
-        })
+    auth:async(req,res,next)=>{
+        if(!req.headers||!req.headers.authorization) res.json({error:'Token not received'})
+        let authorization = req.headers.authorization
+        let decoded
+        try{
+            decoded = jwt.verify(authorization,process.env.JWT_SECRET)
+        }
+        catch(err){res.json({error:err})}
+        let userID = decoded.id
+        try{
+            await User.findById(userID)
+            next()
+        }
+        catch(err){res.json({error:err})}
     },
     register:async (req,res)=>{
         try{

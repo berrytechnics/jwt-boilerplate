@@ -13,16 +13,9 @@ app.post('/register',(req,res)=>{
 app.post('/login',(req,res)=>{
     User.login(req,res)
 })
-app.all('/user',async(req,res)=>{
-    try{
-        const user = await User.validateToken(req)
-        res.json(user)
-    }
-    catch(e){
-        res.json({error:e})
-    }
+app.all('/user',User.auth,(req,res)=>{
+    res.json({message:"User Authorized"})
 })
-
 app.use((err,req,res,next)=>err?next(err):res.json({error:'An unknown error occurred'}))
 app.use((err,req,res)=>res.json({error:err}))
 mongoose.connect(process.env.MONGO_URI)
