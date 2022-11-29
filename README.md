@@ -1,6 +1,6 @@
-# passport-jwt-boilerplate
+# jwt-boilerplate
 
-A simple boilerplate to help with setting up other projects requiring authorization/authentication using passport.js and JSON web tokens
+A simple boilerplate to help with setting up other projects requiring authorization/authentication using JSON web tokens
 
 this boilerplate requires a `.env` file containing at least these variables
 ```

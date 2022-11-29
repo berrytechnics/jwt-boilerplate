@@ -9,7 +9,6 @@ import {User} from './db.js'
 import validateToken from './userFromToken.js'
 const app = express()
 app.use(bodyParser.json())
-
 app.post('/register',(req,res)=>{
     !req.body.username||!req.body.password ? res.json({error:'Missing parameters!'}):null
     User.create({
@@ -43,7 +42,6 @@ app.post('/user',async(req,res)=>{
         res.json({error:e})
     }
 })
-
 app.use((err,req,res,next)=>err?next(err):res.status(500).send('An unknown error occurred!'))
 app.use((err,req,res)=>res.status(400).send(new Error(err)))
 app.listen(process.env.PORT,()=>{

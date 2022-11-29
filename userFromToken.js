@@ -16,7 +16,6 @@ export default function(req){
                 .findById(userId)
                 .then(user=>{resolve({_id:user._id,username:user.username})})
                 .catch(e=>reject('Token Error: '+e))
-            
         }
         else reject('No token found')
     })

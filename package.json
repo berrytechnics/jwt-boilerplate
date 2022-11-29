@@ -1,5 +1,5 @@
 {
-  "name": "passport-jwt-boilerplate",
+  "name": "jwt-boilerplate",
   "version": "1.0.0",
   "type": "module",
   "main": "main.js",
@@ -15,7 +15,5 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.4",
-    "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
   }
 }
